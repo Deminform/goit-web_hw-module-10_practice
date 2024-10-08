@@ -1,7 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
 # Create your views here.
 
 
 def index(request):
-    return HttpResponse('Hello World!')
+    return render(request, 'app_photo/index.html', context={'msg': 'Hello World!'})
