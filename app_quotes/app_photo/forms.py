@@ -1,6 +1,6 @@
 from django.forms import CharField, FileInput, ImageField, ModelForm, TextInput
 
-from .models import Pictures
+from .models import Picture
 
 
 class PicturesForm(ModelForm):
@@ -10,5 +10,5 @@ class PicturesForm(ModelForm):
     path = ImageField(widget=FileInput(attrs={'class': 'form-control', 'id': 'formFile', 'accept': 'image/*'}))
 
     class Meta:
-        model = Pictures
+        model = Picture
         fields = ['description', 'path']

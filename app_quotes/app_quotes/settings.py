@@ -122,7 +122,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 LOGIN_URL = '/auth/signin'
 LOGIN_REDIRECT_URL = '/images/'
-LOGOUT_REDIRECT_URL = '/auth/signin'
+# LOGOUT_REDIRECT_URL = '/auth/logout/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

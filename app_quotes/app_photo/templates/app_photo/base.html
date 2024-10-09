@@ -13,6 +13,8 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
@@ -20,33 +22,51 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'app_photo:home' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app_photo:pictures' %}">Photo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app_photo:upload' %}">Upload</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app_auth:logout' %}">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app_auth:signin' %}">Signin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app_auth:signup' %}">Signup</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+    <!-- Изменение: Добавлен класс w-100 -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'app_photo:home' %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'app_photo:pictures' %}">Photo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'app_photo:upload' %}">Upload</a>
+        </li>
+        {% endif %}
+
+        <!-- Изменение: Добавлен пустой элемент с классом ms-auto -->
+        <li class="nav-item ms-auto"></li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <form method="POST" action="{% url 'app_auth:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="nav-link btn btn-link">Logout</button>
             </form>
-        </div>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'app_auth:signin' %}">Signin</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'app_auth:signup' %}">Signup</a>
+        </li>
+        {% endif %}
+    </ul>
+
+    <!-- Поиск остался без изменений -->
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>
+
     </div>
 </nav>
+
+
 {% block content %}
 {% endblock %}
 </body>

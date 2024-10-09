@@ -11,7 +11,10 @@
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">{{ pic.description }}</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="d-inline-flex">
+                                <a href="{% url 'app_photo:edit' pic.id %}" class="btn btn-secondary btn-sm me-2">Edit description</a>
+                                <a href="{% url 'app_photo:remove' pic.id %}" class="btn btn-secondary btn-sm">Delete image</a>
+                            </div>
                         </div>
                     </div>
                 </div>
