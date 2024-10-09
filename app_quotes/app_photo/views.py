@@ -9,7 +9,8 @@ def index(request):
 
 
 def pictures(request):
-    return render(request, 'app_photo/pictures.html', context={'pictures': 'Hello World!'})
+    pics = Pictures.objects.all()
+    return render(request, 'app_photo/pictures.html', context={'pics': pics})
 
 
 def upload(request):
