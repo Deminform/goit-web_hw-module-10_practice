@@ -1,5 +1,6 @@
-from django.shortcuts import render
-
+from django.shortcuts import redirect, render
+from .forms import PicturesForm
+from .models import Pictures
 # Create your views here.
 
 
@@ -12,4 +13,10 @@ def pictures(request):
 
 
 def upload(request):
-    return render(request, 'app_photo/upload.html', context={'upload': 'Hello World!'})
+    form = PicturesForm(instance=Pictures())
+    if request.method == 'POST':
+        form = PicturesForm(request.POST, request.FILES, instance=Pictures())
+        if form.is_valid():
+            form.save()
+            return redirect(to='app_photo:pictures')
+    return render(request, 'app_photo/upload.html', context={'form': form})
